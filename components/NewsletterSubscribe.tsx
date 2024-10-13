@@ -26,6 +26,13 @@ interface NewsletterSubscribeProps {
   title?: string;
   subtitle?: string;
   type?: string;
+  emailInput?: string;
+  nameInput?: string;
+  subscribeBtn?: string;
+  successTitle?: string;
+  errorTitle?: string;
+  errorSubtitle?: string;
+  errorLinkText?: string;
 }
 
 /**
@@ -43,7 +50,16 @@ export default function NewsletterSubscribe({
   dark = false,
   title = 'Subscribe to our newsletter to receive news about AsyncAPI.',
   subtitle = 'We respect your inbox. No spam, promise ✌️',
-  type = 'Newsletter'
+  type = 'Newsletter',
+  emailInput="Your email",
+  nameInput="Your name",
+  subscribeBtn= "Subscribe",
+  successTitle= "Thank you for subscribing!",
+  errorTitle= "Something went wrong",
+  errorSubtitle= "Subscription failed, please let us know about it by submitting a bug",
+  errorLinkText= "here"
+
+  
 }: NewsletterSubscribeProps) {
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -94,10 +110,10 @@ export default function NewsletterSubscribe({
     return (
       <div className={className} data-testid='NewsletterSubscribe-main'>
         <Heading level={HeadingLevel.h3} textColor={headTextColor} typeStyle={HeadingTypeStyle.lg} className='mb-4'>
-          {t('newsletterCTA.successTitle')}
+          {successTitle}
         </Heading>
         <Paragraph className='mb-8' textColor={paragraphTextColor}>
-          {t('newsletterCTA.subtitle')}
+          {subtitle}
         </Paragraph>
       </div>
     );
@@ -107,12 +123,12 @@ export default function NewsletterSubscribe({
     return (
       <div className={className} data-testid='NewsletterSubscribe-main'>
         <Heading level={HeadingLevel.h3} textColor={headTextColor} typeStyle={HeadingTypeStyle.lg} className='mb-4'>
-          {t('newsletterCTA.errorTitle')}
+          {errorTitle}
         </Heading>
         <Paragraph className='mb-8' textColor={paragraphTextColor}>
-          {t('newsletterCTA.errorSubtitle')}{' '}
+          {errorSubtitle}{' '}
           <TextLink href='https://github.com/asyncapi/website/issues/new?template=bug.md' target='_blank'>
-            {t('newsletterCTA.errorLinkText')}
+            {errorLinkText}
           </TextLink>
         </Paragraph>
       </div>
@@ -134,20 +150,20 @@ export default function NewsletterSubscribe({
           <InputBox
             inputType={InputTypes.TEXT}
             inputName='name'
-            placeholder={t('newsletterCTA.nameInput')}
+            placeholder={nameInput}
             inputValue={name}
             setInput={setName}
           />
           <InputBox
             inputType={InputTypes.EMAIL}
             inputName='email'
-            placeholder={t('newsletterCTA.emailInput')}
+            placeholder={emailInput}
             inputValue={email}
             setInput={setEmail}
           />
           <Button
             type={ButtonType.SUBMIT}
-            text={t('newsletterCTA.subscribeBtn')}
+            text={subscribeBtn}
             className='mt-2 w-full md:mr-2 md:mt-0 md:flex-1'
             href=''
           />
